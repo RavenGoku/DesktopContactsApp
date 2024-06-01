@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using Microsoft.Win32;
+using SQLite;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,13 +21,24 @@ namespace DesktopContactsApp
         public MainWindow()
         {
             InitializeComponent();
+
+            ReadDatabase();
         }
 
         private void OpenNewContact_Click(object sender, RoutedEventArgs e)
         {
-            NewConctactWindow newConctactWindow = new NewConctactWindow();
+            NewConctactWindow newContactWindow = new NewConctactWindow();
+            newContactWindow.ShowDialog();
 
-            newConctactWindow.ShowDialog();
+            //update window with saved new contact
+            ReadDatabase();
+        }
+
+        private void ReadDatabase()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.databasePath))
+            {
+            }
         }
     }
 }
