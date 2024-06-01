@@ -5,10 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopContactsApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ContactApp" Height="450" Width="800">
     <Grid>
         <StackPanel Margin="10">
-            <Button Content="New Contact" Width="150" Height="40" Name="OpenNewContact" Click="OpenNewContact_Click" />
+            <Button Content="New Contact"
+                    Width="150"
+                    Height="40"
+                    Name="OpenNewContact"
+                    Click="OpenNewContact_Click" />
+
+            <TextBox Margin="0,10,0,10" TextChanged="IfTextIsChanging_TextChanged" />
+
+            <ListView x:Name="contactsListView"
+                      MouseDoubleClick= "SelectedContact_DoubleClick"
+                      Margin="0 5 0 0">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="20"
+                                   FontWeight="Bold" />
+                            <TextBlock Text="{Binding Email}"
+                                   FontSize="15"
+                                   Foreground="DodgerBlue" />
+                            <TextBlock Text="{Binding PhoneNumber}"
+                                   FontSize="15"
+                                   FontStyle="Italic" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </Window>

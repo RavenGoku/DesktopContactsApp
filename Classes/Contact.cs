@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace DesktopContactsApp.Classes
 {
-    [Table("Person")]
     public class Contact
     {
         //Using SQLite with atribute for PirmaryKey and AutoIncrementation
@@ -22,5 +21,11 @@ namespace DesktopContactsApp.Classes
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+
+        // override  ToString() method - is called when object have to be displayed as item of list etc.
+        public override string ToString()
+        {
+            return $"{Name} - {Email} - {PhoneNumber}";
+        }
     }
 }
