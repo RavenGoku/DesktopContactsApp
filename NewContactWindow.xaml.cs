@@ -20,11 +20,20 @@ namespace DesktopContactsApp
     /// <summary>
     /// Interaction logic for NewContactWindow.xaml
     /// </summary>
-    public partial class NewConctactWindow : Window
+    public partial class NewContactWindow : Window
     {
-        public NewConctactWindow()
+        private string _shadowName;
+        private Brush _shadowForeground;
+
+        public NewContactWindow()
         {
             InitializeComponent();
+            Owner = App.Current.MainWindow;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            nameTextBox.Text = "Name";
+            emailTextBox.Text = "Email";
+            phoneTextBox.Text = "Phone";
+            _shadowForeground = nameTextBox.Foreground;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
@@ -53,6 +62,39 @@ namespace DesktopContactsApp
             }
             //closing window after save new contact
             this.Close();
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox focusedTextBox = (TextBox)sender;
+            if (!string.IsNullOrEmpty(focusedTextBox.Text) &&
+                focusedTextBox.Text == "Name" ||
+                focusedTextBox.Text == "Email" ||
+                focusedTextBox.Text == "Phone")
+            {
+                focusedTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                focusedTextBox.Text = "";
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox LostFocusedTextBox = (TextBox)sender;
+            if (LostFocusedTextBox.Equals(nameTextBox) && string.IsNullOrEmpty(LostFocusedTextBox.Text))
+            {
+                nameTextBox.Text = "Name";
+                nameTextBox.Foreground = _shadowForeground;
+            }
+            if (LostFocusedTextBox.Equals(emailTextBox) && string.IsNullOrEmpty(LostFocusedTextBox.Text))
+            {
+                emailTextBox.Text = "Email";
+                emailTextBox.Foreground = _shadowForeground;
+            }
+            if (LostFocusedTextBox.Equals(phoneTextBox) && string.IsNullOrEmpty(LostFocusedTextBox.Text))
+            {
+                phoneTextBox.Text = "Phone";
+                phoneTextBox.Foreground = _shadowForeground;
+            }
         }
     }
 }

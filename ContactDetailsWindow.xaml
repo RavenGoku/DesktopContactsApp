@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopContactsApp"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="ContactDetailsWindow" Height="300" Width="300">
     <Grid>
         <StackPanel Margin="10">

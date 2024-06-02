@@ -1,4 +1,5 @@
 ﻿using DesktopContactsApp.Classes;
+using DesktopContactsApp.Controls;
 using Microsoft.Win32;
 using SQLite;
 using System.Text;
@@ -28,9 +29,9 @@ namespace DesktopContactsApp
             ReadDatabase();
         }
 
-        private void OpenNewContact_Click(object sender, RoutedEventArgs e)
+        private void NewContact_ButtonClick(object sender, RoutedEventArgs e)
         {
-            NewConctactWindow newContactWindow = new NewConctactWindow();
+            NewContactWindow newContactWindow = new NewContactWindow();
             newContactWindow.ShowDialog();
 
             //update window with saved new contact
