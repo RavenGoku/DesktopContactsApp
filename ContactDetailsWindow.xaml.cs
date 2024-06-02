@@ -48,12 +48,18 @@ namespace DesktopContactsApp
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            using (SQLiteConnection openConnection = new SQLiteConnection(App.databasePath))
+            var result = MessageBox.Show("Are you sure you want delete contact?", "Warning", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+            //get result from message box button if you would like to delete contact
+            if (result == MessageBoxResult.Yes)
             {
-                openConnection.CreateTable<Contact>();
-                openConnection.Delete(_contact);
-            };
-            Close();
+                using (SQLiteConnection openConnection = new SQLiteConnection(App.databasePath))
+                {
+                    openConnection.CreateTable<Contact>();
+                    openConnection.Delete(_contact);
+                };
+                Close();
+            }
         }
     }
 }
